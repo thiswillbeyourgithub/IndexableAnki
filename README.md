@@ -2,7 +2,7 @@
 Turn each card of an anki collection into easily searchable txt files. 
 
 ## Please read :
-* **Why did I make this?** I wanted to make my anki databases searchable though Recoll or Docfetcher (those are desktop search engines).
+* **Why did I make this?** I wanted to make my anki databases searchable though [Recoll](https://www.lesbonscomptes.com/recoll/) or Docfetcher (those are desktop search engines).
 * **What do you think of issues and contributions?** They are more than welcome, even just for typos, don't hesitate to open an issue.
 * **Will this change my collection?** No, it makes a copy before hand and doesn't change a thing.
 * **What version of python should I use?** It has been tested on Python 3.9
