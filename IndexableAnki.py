@@ -1,10 +1,26 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Indexable Anki
-# The goal is to export all anki databses as txt files (one file per card)
-# so that it can be accessible using desktop search
-# engines such as Recoll or DocFetcher.
+#    Released under the GNU General Public License v3.
+#    Copyright (C) - 2021 - user "thiswillbeyourgithub" of "github.com"
+#    This file is IndexableAnki. It aims to make your anki database searchable
+#
+#    IndexableAnki is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    IndexableAnki is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with IndexableAnki.  If not, see <https://www.gnu.org/licenses/>.
+
+#    for more information or to get the latest version go to :
+#    https://github.com/thiswillbeyourgithub/IndexableAnki
+#    Version : March 2021
 
 
 # imports ###################################################
