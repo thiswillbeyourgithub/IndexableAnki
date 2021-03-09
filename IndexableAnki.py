@@ -102,6 +102,7 @@ deck_id_name = query_sql("decks").copy().set_index("id")
 print("Adjusting DataFrame...")
 db.drop(columns=['guid', 'mid', 'mod', 'usn', 'csum', 'flags', 'data'],
         inplace=True)
+db.sort_index()
 
 
 def deck_namer(card_id, card_id_did, deck_id_name):
@@ -124,7 +125,7 @@ def text_processor(content) :
     content = re.sub('\\n|<div>|</div>|<br>', " ", content)  # removes newline
     content = re.sub('\u001F', " ", content)  # removes \x1F
     content = re.sub("\[sound:.*?\]", " ", content)  # extract title of
-    # images (usually OCR'd text) before html is removed
+    # images (usually OCRed text) before html is removed
     content = re.sub("paste-.*?\....", "", content)
     content = re.sub("title=(\".*?\")", ">OCR:\\1<", content)  # extract
     # title of images (usually OCR'd text) before html is removed
@@ -140,7 +141,7 @@ print("Processing text content 1/2...")
 db["sfld"] = [text_processor(content) for content in tqdm(db["sfld"])]
 print("Processing text content 2/2...")
 db["flds"] = [text_processor(content) for content in tqdm(db["flds"])]
-db.sort_index()
+
 
 
 os.system(f'mkdir -p "{args["out_loc_full"]}"')
