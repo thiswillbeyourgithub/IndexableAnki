@@ -150,6 +150,7 @@ def save_card_as_file(card_id):
     with open(f'{args["out_loc_full"]}/{card_id}.txt',
               'w', encoding="utf-8") as f:
         string = "ANKI EXPORT AS TXT\n"
+        string += f"anki profile: {args['profile']}\n"
         string += f"card id: {card_id}\n"
         string += f"tags: {str(db.loc[card_id]['tags']).strip()}\n"
         string += f"deck: {str(db.loc[card_id]['deck_name']).strip()}\n"
