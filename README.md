@@ -8,7 +8,7 @@ Turn each card of an anki collection into easily searchable txt files.
 * **What version of python should I use?** It has been tested on Python 3.9
 
 ## TODO :
-* I think the text_processor() function is not currently vectorized and taking a lot of time. There are better ways to use regex matching on a pandas dataFrame that are probably much much faster.
+* None! Don't hesitate to open an issue
 
 ## Usage :
     ` python3 ./IndexableAnki.py -a ~/.local/share/Anki2 -p Myprofile -o ~/Documents/ -t /tmp/anki.db`
