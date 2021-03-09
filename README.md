@@ -9,6 +9,7 @@ Turn each card of an anki collection into easily searchable txt files.
 
 ## TODO :
 * switch to ankipandas instead of doing it on your own, it seems way easier
+* it really is useless to create a copy of the db to index it
 
 ## Usage :
     ` python3 ./IndexableAnki.py -a ~/.local/share/Anki2 -p Myprofile -o ~/Documents/ -t /tmp/anki.db`
