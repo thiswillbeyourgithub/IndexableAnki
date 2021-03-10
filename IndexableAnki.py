@@ -159,7 +159,7 @@ for i in tqdm(db.index):
     save_card_as_file(i)
 
 print("Compressing as a tar archive...")
-os.system(f"tar cJvf {args['output_dir']}/IndexableAnki.tar.xz /tmp/IndexableAnki")
+os.system(f"tar cJf {args['output_dir']}/IndexableAnki.tar.xz /tmp/IndexableAnki")
 
 
 print("Cleaning up...")
