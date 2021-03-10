@@ -159,6 +159,8 @@ for i in tqdm(db.index):
     save_card_as_file(i)
 
 print("Compressing as a tar archive...")
+if " " in args['profile']:  # fixes unescaped spaces
+    args['profile_escaped'] = args['profile'].replace(" ", "_")
 os.system(f"cd /tmp/IndexableAnki && zip -9 {args['output_dir']}/IndexableAnki_{args['profile']}.zip ./*")
 
 
