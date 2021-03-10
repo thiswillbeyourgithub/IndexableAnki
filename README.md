@@ -1,5 +1,5 @@
 # IndexableAnki
-Turn each card of an anki collection into easily searchable txt files. 
+Turn each card of an anki collection into txt files that can be searched using a desktop search engine like [Recoll](https://www.lesbonscomptes.com/recoll/) or Docfetcher etc. 
 
 ## Please read:
 * **Why did I make this?** I wanted to make my anki databases searchable though [Recoll](https://www.lesbonscomptes.com/recoll/) or Docfetcher (those are desktop search engines).
