@@ -1,17 +1,20 @@
 # IndexableAnki
 Turn each card of an anki collection into easily searchable txt files. 
 
-## Please read :
+## Please read:
 * **Why did I make this?** I wanted to make my anki databases searchable though [Recoll](https://www.lesbonscomptes.com/recoll/) or Docfetcher (those are desktop search engines).
 * **What do you think of issues and contributions?** They are more than welcome, even just for typos, don't hesitate to open an issue.
 * **Will this change my collection?** No, it makes a copy before hand and doesn't change a thing.
 * **What version of python should I use?** It has been tested on Python 3.9
+* **I'd like to index my rss reader into recoll, is it possible?** I created just that [over there](https://github.com/thiswillbeyourgithub/IndexableNewsboat)
+* **How does it work?** It finds your databse, copies it inside /tmp (otherwise it might be locked), loads it into pandas, drops useless columns,finds the deck name and add it to each line, saves each card as a .txt file, zips all the txt files together, moves the zip in the desired folder, deletes the txt files and the temporary db.
+* **Is it cross platform?** Currently no, only linux, and OSX could maybe work quite easily. It's on the todo list but don't be afraid to ask if you think you need this.
 
-## TODO :
+## TODO:
 * switch to ankipandas instead of doing it on your own, it seems way easier
 * make it OS agnostic, so far it can only work on linux and possibly OSX
 
-## Usage :
+## Usage:
     ` python3 ./IndexableAnki.py -a ~/.local/share/Anki2 -p Myprofile -o ~/Documents/ -t /tmp/anki.db`
 
 ```
@@ -34,7 +37,7 @@ optional arguments:
                         /tmp/anki.db)
 ```
 
-## How do card look like afterwards?
+## How do cards look like afterwards?
 Here's an example card :
 
 ```
