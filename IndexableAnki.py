@@ -61,6 +61,11 @@ if args['anki_loc'] is None or\
 else:
     args['db_loc'] = f"{args['anki_loc']}/{args['profile']}/collection.anki2"
 
+if " " in args['profile']:  # fixes unescaped spaces
+    args['profile_escaped'] = args['profile'].replace(" ", "_")
+else :
+    args['profile_escaped'] = args['profile']
+
 if not os.path.exists(args["db_loc"]):
     print(f"Anki db not found.\n{args}\nExiting.")
     raise SystemExit()
@@ -142,7 +147,7 @@ os.system(f'mkdir -p "/tmp/IndexableAnki"')
 
 
 def save_card_as_file(card_id):
-    with open(f'/tmp/IndexableAnki/{card_id}.txt',
+    with open(f"/tmp/IndexableAnki/Anki_{args['profile_escaped']}_{card_id}.txt",
               'w', encoding="utf-8") as f:
         string = "ANKI EXPORT AS TXT\n"
         string += f"anki profile: {args['profile']}\n"
@@ -159,9 +164,7 @@ for i in tqdm(db.index):
     save_card_as_file(i)
 
 print("Compressing as a zip archive...")
-if " " in args['profile']:  # fixes unescaped spaces
-    args['profile_escaped'] = args['profile'].replace(" ", "_")
-os.system(f"cd /tmp/IndexableAnki && zip -9 {args['output_dir']}/IndexableAnki_{args['profile']}.zip ./*")
+os.system(f"cd /tmp/IndexableAnki && zip -9 {args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip ./*")
 
 
 print("Cleaning up...")
