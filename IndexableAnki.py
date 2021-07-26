@@ -121,19 +121,23 @@ db.sort_index()
 def text_processor(content):
     "to remove clozes and useless html"
     content = str(content).lower()
-    content = re.sub('\'', " ", content)  # removes ''
-    content = re.sub('\\n|<div>|</div>|<br>', " ", content)  # removes newline
-    content = re.sub('\u001F', " ", content)  # removes \x1F
-    content = re.sub("\[sound:.*?\]", " ", content)  # extract title of
+    content = content.replace("\'", " ")  # removes ''
+    content = content.replace("\\n", " ")  # removes newline
+    content = content.replace("<div>", " ")
+    content = content.replace("</div>", " ")
+    content = content.replace("<br>", " ")
+    content = content.replace("\u001F", " ")  # removes \x1F
+    content = re.sub(r"\[sound:.*?\]", " ", content)  # extract title of
     # images (usually OCRed text) before html is removed
-    content = re.sub("paste-.*?\....", "", content)
+    content = re.sub(r"paste-.*?\....", "", content)
     content = re.sub("title=(\".*?\")", ">OCR:\\1<", content)  # extract
     # title of images (usually OCR'd text) before html is removed
     content = re.sub("<.*?>", " ", content)  # removes all html
-    content = re.sub("{{c\d+::|}}", "", content)  # removes clozing
-    content = re.sub("::|:", " ", content)  # part of clozing + punc
-    content = re.sub("&nbsp;", " ", content)  # html spaces
-    content = re.sub("/", " ", content)  # replaces / by a space
+    content = re.sub(r"{{c\d+::", "", content)  # removes clozing
+    content = content.replace("}}", " ")  # replace clozing with a space
+    content = content.replace("::", " ")  # part of clozing + punct
+    content = content.replace("&nbsp;", " ")  # html spaces
+    content = content.replace("/", " ")  # slash
     return content
 
 
