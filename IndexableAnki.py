@@ -36,17 +36,20 @@ from tqdm import tqdm
 parser = argparse.ArgumentParser()
 parser.add_argument("-a",
                     "--anki",
-                    help="The path to the anki folder(ex: /home/USER/.local/share/Anki2/)",
+                    help="The path to the anki folder(ex:\
+/home/USER/.local/share/Anki2/)",
                     dest="anki_loc",
                     metavar="ANKI_PATH")
 parser.add_argument("-p",
                     "--profile",
-                    help="Name of the anki profile you want to make indexable (ex: Main)",
+                    help="Name of the anki profile you want to make\
+indexable (ex: Main)",
                     dest="profile",
                     metavar="ANKI_PROFILE")
 parser.add_argument("-o",
                     "--output_dir",
-                    help="Path to the directory where the indexable archive will be found",
+                    help="Path to the directory where the indexable\
+archive will be found",
                     dest="output_dir",
                     metavar="OUT_PATH")
 args = parser.parse_args().__dict__
@@ -78,7 +81,6 @@ print("Creating temporary db at /tmp/anki_temporary.db...")
 if " " in args['db_loc']:  # fixes unescaped spaces
     args['db_loc'] = args['db_loc'].replace(" ", r"\ ")
 os.system(f"cp --remove-destination {args['db_loc']} /tmp/anki_temporary.db")
-
 
 
 def query_sql(table):
@@ -141,9 +143,8 @@ print("Processing text content 2/2...")
 db["flds"] = [text_processor(content) for content in tqdm(db["flds"])]
 
 
-
-os.system(f'rm -r "/tmp/IndexableAnki"')
-os.system(f'mkdir -p "/tmp/IndexableAnki"')
+os.system('rm -r "/tmp/IndexableAnki"')
+os.system('mkdir -p "/tmp/IndexableAnki"')
 
 
 def save_card_as_file(card_id):
@@ -173,4 +174,3 @@ os.system("rm -r /tmp/anki_temporary.db")
 
 
 print("Done!\nExiting...")
-
