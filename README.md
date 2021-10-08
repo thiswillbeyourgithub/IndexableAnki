@@ -11,7 +11,7 @@ Turn each card of an anki collection into txt files that can be searched using a
 * **Is it cross platform?** Currently no, only Linux, and OSX could maybe work quite easily. It's on the todo list but don't be afraid to ask if you think you need this.
 
 ## TODO:
-* switch to ankipandas instead of doing it on your own, it seems way easier
+* use ankipandas
 * make it OS agnostic, so far it can only work on linux and possibly OSX
 
 ## Usage:
