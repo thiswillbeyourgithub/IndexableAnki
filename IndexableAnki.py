@@ -80,8 +80,6 @@ else:
 # main code ###################################################
 
 print("Creating temporary db at /tmp/anki_temporary.db...")
-if " " in args['db_loc']:  # fixes unescaped spaces
-    args['db_loc'] = args['db_loc'].replace(" ", r"\ ")
 Path.unlink(Path("/tmp/anki_temporary.db"), missing_ok=True)
 shutil.copy(args['db_loc'], "/tmp/anki_temporary.db")
 
