@@ -170,7 +170,7 @@ for i in tqdm(db.index):
 
 print("Compressing as a zip archive...")
 os.system(f"rm -r {args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip")
-os.system(f"cd /tmp/IndexableAnki && zip -9 {args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip ./*")
+os.system(f"cd /tmp/IndexableAnki && zip -9 {args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip *")
 
 
 print("Cleaning up...")
