@@ -30,6 +30,8 @@ import os
 import re
 import argparse
 from tqdm import tqdm
+from pathlib import Path
+import shutil
 
 
 # arguments ###################################################
@@ -69,7 +71,7 @@ if " " in args['profile']:  # fixes unescaped spaces
 else :
     args['profile_escaped'] = args['profile']
 
-if not os.path.exists(args["db_loc"]):
+if not Path.exists(Path(args["db_loc"])):
     print(f"Anki db not found.\n{args}\nExiting.")
     raise SystemExit()
 else:
@@ -80,7 +82,8 @@ else:
 print("Creating temporary db at /tmp/anki_temporary.db...")
 if " " in args['db_loc']:  # fixes unescaped spaces
     args['db_loc'] = args['db_loc'].replace(" ", r"\ ")
-os.system(f"cp --remove-destination {args['db_loc']} /tmp/anki_temporary.db")
+Path.unlink(Path("/tmp/anki_temporary.db"), missing_ok=True)
+shutil.copy(args['db_loc'], "/tmp/anki_temporary.db")
 
 
 def query_sql(table):
@@ -147,8 +150,8 @@ print("Processing text content 2/2...")
 db["flds"] = [text_processor(content) for content in tqdm(db["flds"])]
 
 
-os.system('rm -r "/tmp/IndexableAnki"')
-os.system('mkdir -p "/tmp/IndexableAnki"')
+shutil.rmtree("/tmp/IndexableAnki", ignore_errors=True)
+Path.mkdir(Path("/tmp/IndexableAnki"), exist_ok=True)
 
 
 def save_card_as_file(card_id):
@@ -169,13 +172,13 @@ for i in tqdm(db.index):
     save_card_as_file(i)
 
 print("Compressing as a zip archive...")
-os.system(f"rm -r {args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip")
+Path.unlink(Path(f"{args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip"), missing_ok=True)
 os.system(f"cd /tmp/IndexableAnki && zip -9 {args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip *")
 
 
 print("Cleaning up...")
-os.system("rm -r /tmp/IndexableAnki")
-os.system("rm -r /tmp/anki_temporary.db")
+shutil.rmtree("/tmp/IndexableAnki")
+Path.unlink(Path("/tmp/anki_temporary.db"), missing_ok=True)
 
 
 print("Done!\nExiting...")
