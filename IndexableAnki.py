@@ -38,22 +38,28 @@ import shutil
 parser = argparse.ArgumentParser()
 parser.add_argument("-a",
                     "--anki",
-                    help="The path to the anki folder(ex:\
+                    help="The path to the anki folder (ex: \
 /home/USER/.local/share/Anki2/)",
                     dest="anki_loc",
                     metavar="ANKI_PATH")
 parser.add_argument("-p",
                     "--profile",
-                    help="Name of the anki profile you want to make\
+                    help="Name of the anki profile you want to make \
 indexable (ex: Main)",
                     dest="profile",
                     metavar="ANKI_PROFILE")
 parser.add_argument("-o",
                     "--output_dir",
-                    help="Path to the directory where the indexable\
+                    help="Path to the directory where the indexable \
 archive will be found",
                     dest="output_dir",
                     metavar="OUT_PATH")
+parser.add_argument("-f",
+                    "--format",
+                    help="Format of the output archive. Default: zip",
+                    dest="format",
+                    choices=["zip", "directory"],
+                    default="zip")
 args = parser.parse_args().__dict__
 
 
@@ -169,13 +175,20 @@ print("Saving cards as txt...")
 for i in tqdm(db.index):
     save_card_as_file(i)
 
-print("Compressing as a zip archive...")
-Path.unlink(Path(f"{args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip"), missing_ok=True)
-os.system(f"cd /tmp/IndexableAnki && zip -9 -r {args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip .")
+if args['format'] == 'zip':
+    print("Compressing as a zip archive...")
+    destination = Path(f"{args['output_dir']}/IndexableAnki_{args['profile_escaped']}.zip")
+    Path.unlink(destination, missing_ok=True)
+    os.system(f"cd /tmp/IndexableAnki && zip -9 -r {destination} .")
+else:
+    print("Saving as a directory...")
+    destination = Path(f"{args['output_dir']}/IndexableAnki_{args['profile_escaped']}")
+    shutil.rmtree(destination, ignore_errors=True)
+    os.system(f"mv /tmp/IndexableAnki {destination}")
 
 
 print("Cleaning up...")
-shutil.rmtree("/tmp/IndexableAnki")
+shutil.rmtree("/tmp/IndexableAnki", ignore_errors=True)
 Path.unlink(Path("/tmp/anki_temporary.db"), missing_ok=True)
 
 
