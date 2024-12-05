@@ -1,6 +1,8 @@
 # IndexableAnki
 Turn each card of an anki collection into txt files that can be searched using a desktop search engine like [Recoll](https://www.lesbonscomptes.com/recoll/) or Docfetcher etc. 
 
+**Note: For a more powerful version, you can use [my sophisticated RAG lib, wdoc,](https://wdoc.readthedocs.io/en/stable) to parse anki notes as text: `wdoc_parse_file --filetype "anki" --anki_profile "Main" --anki_deck "mydeck::subdeck1" --anki_notetype "my_notetype" --anki_template "<header>\n{header}\n</header>\n<body>\n{body}\n</body>\n<personal_notes>\n{more}\n</personal_notes>\n<tags>{tags}</tags>\n{image_ocr_alt}" --anki_tag_filter "a::tag::regex::.*something.*" --only_text`**
+
 ## Please read:
 * **Why did I make this?** I wanted to make my anki databases searchable though [Recoll](https://www.lesbonscomptes.com/recoll/) or Docfetcher (those are desktop search engines).
 * **What do you think of issues and contributions?** They are more than welcome, even just for typos, don't hesitate to open an issue.
